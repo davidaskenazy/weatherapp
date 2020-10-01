@@ -24,17 +24,17 @@ class _HomeState extends State<Home> {
   var humidity;
   var windSpeed;
 
-  Future getWeather() async {
+  Future<void> getWeather() async {
     http.Response response = await http.get(
         "http://api.openweathermap.org/data/2.5/weather?q=Boston&appid=2cded736ac1666bfb34403a845a084e7");
     var results = jsonDecode(response.body);
-    print(results);
+
     setState(() {
-      this.temp = results['main']['temp'];
-      this.description = results['wheather'][0]['description'];
-      this.currently = results['wheather'][0]['main'];
-      this.humidity = results['main']['humidity'];
-      this.windSpeed = results['wind']['speed'];
+      this.temp = results['main']['temp']; // WORK
+      this.description = results['weather'][0]['description']; //
+      this.currently = results['weather'][0]['main']; //
+      this.humidity = results['main']['humidity']; // WORK
+      this.windSpeed = results['wind']['speed']; //WORK
     });
   }
 
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    "Currently in Boscon",
+                    "Currently in Boston",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 14.0,
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  temp != null ? temp.toString() + "\u0080" : "Loading",
+                  temp != null ? temp.toString() + "\u00B0" : "Loading",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 40.0,
@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                   leading: FaIcon(FontAwesomeIcons.thermometerHalf),
                   title: Text("Temperature"),
                   trailing: Text(
-                      temp != null ? temp.toString() + "\u0080" : "Loading"),
+                      temp != null ? temp.toString() + "\u00B0" : "Loading"),
                 ),
                 ListTile(
                   leading: FaIcon(FontAwesomeIcons.cloud),
